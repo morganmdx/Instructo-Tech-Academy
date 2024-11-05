@@ -49,29 +49,6 @@ function remove_wp_dashboard_widgets() {
 }
 add_action('wp_dashboard_setup', 'remove_wp_dashboard_widgets');
 
-// Disable the admin toolbar for all users on the frontend
-add_filter('show_admin_bar', '__return_false');
-
-// Optionally, remove the toolbar completely for non-admins
-function remove_admin_bar_for_non_admins() {
-    if (!current_user_can('administrator') && !is_admin()) {
-        show_admin_bar(false);
-    }
-}
-add_action('after_setup_theme', 'remove_admin_bar_for_non_admins');
-
-// Hide admin bar for all users, both frontend and backend
-add_filter('show_admin_bar', '__return_false');
-
-// Hide the admin bar menu elements in the backend (dashboard)
-function hide_admin_bar_backend() {
-    if (!current_user_can('administrator')) {
-        remove_action('in_admin_header', 'wp_admin_bar_render');
-    }
-}
-add_action('admin_init', 'hide_admin_bar_backend');
-
-
 // Disable WordPress emoji script
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
@@ -89,5 +66,8 @@ remove_action('wp_head', 'wp_oembed_add_discovery_links');
 
 // Remove oEmbed-specific JavaScript from front-end and back-end
 remove_action('wp_head', 'wp_oembed_add_host_js');
+
+// Disable the admin bar for all users (frontend and backend)
+add_filter('show_admin_bar', '__return_false');
 
 ?>
