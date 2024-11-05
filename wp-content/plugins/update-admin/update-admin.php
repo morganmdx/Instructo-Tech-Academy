@@ -60,6 +60,17 @@ function remove_admin_bar_for_non_admins() {
 }
 add_action('after_setup_theme', 'remove_admin_bar_for_non_admins');
 
+// Hide admin bar for all users, both frontend and backend
+add_filter('show_admin_bar', '__return_false');
+
+// Hide the admin bar menu elements in the backend (dashboard)
+function hide_admin_bar_backend() {
+    if (!current_user_can('administrator')) {
+        remove_action('in_admin_header', 'wp_admin_bar_render');
+    }
+}
+add_action('admin_init', 'hide_admin_bar_backend');
+
 
 // Disable WordPress emoji script
 remove_action('wp_head', 'print_emoji_detection_script', 7);
