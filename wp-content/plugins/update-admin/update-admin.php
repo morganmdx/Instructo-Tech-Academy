@@ -49,6 +49,18 @@ function remove_wp_dashboard_widgets() {
 }
 add_action('wp_dashboard_setup', 'remove_wp_dashboard_widgets');
 
+// Disable the admin toolbar for all users on the frontend
+add_filter('show_admin_bar', '__return_false');
+
+// Optionally, remove the toolbar completely for non-admins
+function remove_admin_bar_for_non_admins() {
+    if (!current_user_can('administrator') && !is_admin()) {
+        show_admin_bar(false);
+    }
+}
+add_action('after_setup_theme', 'remove_admin_bar_for_non_admins');
+
+
 // Disable WordPress emoji script
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
