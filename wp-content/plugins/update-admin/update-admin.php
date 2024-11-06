@@ -1,7 +1,7 @@
 <?php
 /*
-Plugin Name: Remove WordPress Branding
-Description: Removes WordPress branding, Gravatar functionality, and other WordPress hints from the front and back end.
+Plugin Name: Remove WordPress Branding and Style Admin
+Description: Removes WordPress branding, hides the admin bar, and styles the admin menu to be horizontal with a Material Design look.
 Version: 1.0
 Author: Your Name
 */
@@ -28,46 +28,141 @@ function custom_admin_footer() {
 }
 add_filter('admin_footer_text', 'custom_admin_footer');
 
-// Disable Gravatar
-function disable_gravatar($avatar) {
-    return null;
+// Hide the admin bar for all users in the backend
+function hide_admin_bar_backend_css() {
+    if (is_admin()) {
+        echo "<style type='text/css'>
+                #wpadminbar {
+                    display: none !important;
+                }
+                #wpcontent {
+                    margin-top: 0 !important;
+                }
+              </style>";
+    }
 }
-add_filter('get_avatar', 'disable_gravatar', 1);
+add_action('admin_head', 'hide_admin_bar_backend_css');
 
-// Hide WordPress admin bar logo
-function remove_admin_bar_logo() {
-    global $wp_admin_bar;
-    $wp_admin_bar->remove_node('wp-logo');
-}
-add_action('wp_before_admin_bar_render', 'remove_admin_bar_logo');
-
-// Remove WordPress dashboard widgets
-function remove_wp_dashboard_widgets() {
-    remove_meta_box('dashboard_quick_press', 'dashboard', 'side');
-    remove_meta_box('dashboard_primary', 'dashboard', 'side'); // Removes WordPress News
-    remove_meta_box('dashboard_activity', 'dashboard', 'normal'); // Removes Activity
-}
-add_action('wp_dashboard_setup', 'remove_wp_dashboard_widgets');
-
-// Disable WordPress emoji script
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
-
-// Remove WordPress REST API link in header
-remove_action('wp_head', 'rest_output_link_wp_head');
-remove_action('wp_head', 'wp_oembed_add_discovery_links');
-
-// Remove WordPress RSD and WLW manifest links
-remove_action('wp_head', 'rsd_link');
-remove_action('wp_head', 'wlwmanifest_link');
-
-// Remove oEmbed discovery links
-remove_action('wp_head', 'wp_oembed_add_discovery_links');
-
-// Remove oEmbed-specific JavaScript from front-end and back-end
-remove_action('wp_head', 'wp_oembed_add_host_js');
-
-// Disable the admin bar for all users (frontend and backend)
+// Optionally, also hide the admin bar on the frontend for everyone:
 add_filter('show_admin_bar', '__return_false');
 
+// Style the admin menu to be horizontal with Material Design
+function style_admin_menu() {
+    echo "<style type='text/css'>
+            /* Style the admin menu to be horizontal */
+
+            #adminmenu, #adminmenu .wp-submenu, #adminmenuback, #adminmenuwrap {
+                background: transparent;
+            }
+
+            #adminmenumain {
+                background: #26c6da;
+            }
+
+            #adminmenu {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                background-color: transparent;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+                padding: 10px 0; /* Vertical padding */
+                border-bottom: 1px solid #e0e0e0; /* Light border at the bottom */
+            }
+
+            /* Style each menu item */
+            #adminmenu li {
+                list-style: none;
+                border-radius: 0px !important;
+                margin: 0px; /* Space between menu items */
+                transition: background-color 0.3s ease;
+                position: relative; /* Position for hover effect */
+            }
+
+            #adminmenu li:hover {
+                background-color: #f5f5f5; /* Light hover background */
+            }
+
+            #adminmenu a {
+                color: #333; /* Dark text color */
+                font-weight: 500; /* Medium weight */
+                text-decoration: none;
+                display: block;
+                text-align: center;
+                padding: 10px 15px; /* Padding around text */
+                border-radius: 0px; /* Rounded corners */
+                transition: color 0.3s ease; /* Smooth color transition */
+            }
+
+            #adminmenu div.wp-menu-name {
+                padding: 0px;
+            } 
+
+            #adminmenu a:focus, #adminmenu a:hover, .folded #adminmenu .wp-submenu-head:hover {
+                box-shadow: none;
+                border: none;
+            }
+
+            /* Adjusting the submenu (if desired) */
+            #adminmenu .wp-submenu {
+                display: none !important; /* Hiding the submenu items */
+            }
+
+            /* Hide the WordPress logo */
+            #wp-admin-bar-wp-logo {
+                display: none;
+            }
+
+            /* Hide the admin menu background */
+            #adminmenuback {
+                display: none !important;
+            }
+
+            html.wp-toolbar {
+                padding-top: 0px !important;
+            }
+
+            .sticky-menu #adminmenuwrap {
+                float: none;
+                width: 100%;
+                position: relative !important;
+            }
+
+            /* Admin page content margin adjustment */
+            #wpcontent {
+                margin-top: 60px; /* Adjust space to fit new horizontal menu */
+            }
+
+            #adminmenu {
+                margin-top: 0px;
+                width: 100%;
+                padding: 0px;
+            }
+
+            #adminmenu li.menu-top {
+                padding: 0 7px;
+            }
+
+            #adminmenu a:focus, #adminmenu a:hover, .folded #adminmenu .wp-submenu-head:hover, #adminmenu li.menu-top:hover, #adminmenu li.opensub>a.menu-top, #adminmenu li>a.menu-top:focus {
+                background: #e0f7fa;
+            }
+
+            /* Responsive adjustments */
+            @media (max-width: 768px) {
+                #adminmenu {
+                    flex-direction: column; /* Stack items vertically on small screens */
+                }
+            }
+
+            #adminmenu div.wp-menu-image {
+                float: none;
+                width: 65px;
+            }
+
+            /* Change position of main admin footer and body */
+            #wpcontent, #wpfooter {
+                margin-left: 0px;
+            }
+        </style>";
+}
+add_action('admin_head', 'style_admin_menu');
 ?>

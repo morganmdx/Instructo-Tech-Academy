@@ -1,0 +1,280 @@
+/*
+Theme Name: Instructo Learn
+Theme URI: https://example.com/instructo-learn
+Author: Your Name
+Author URI: https://example.com
+Description: A modern and educational theme designed for online learning platforms. Focuses on clean design and user experience.
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: education, learning, modern, responsive
+Text Domain: instructo-learn
+*/
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: "Libre Franklin", sans-serif;
+    line-height: 1.6;
+    background-color: #fafafa;
+    color: #333;
+}
+
+nav {
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+nav .current-menu-item a {
+    color: #087e8b;
+}
+
+nav a {
+    color: #222222;
+}
+
+h2.h2home {
+    font-family: "Libre Franklin", sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+h1 {
+    font-family: "Luckiest Guy", cursive;
+    font-size: 23px;
+    line-height: 1em;
+    text-align: left;
+}
+
+h1 a span {
+    color: #0b3954;
+    font-size: 33px;
+}
+
+h1 a {
+    color: #087e8b;
+}
+
+#site-header {
+    float: left;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    height: 100%;
+    width: 200px;
+    background: #ffffff;
+    box-shadow: 1px 1px 20px 4px #eee;
+}
+
+#main {
+    float: left;
+    position: relative;
+    padding: 18px;
+    margin-left: 200px;
+    width: calc(100% - 200px);
+}
+
+#main .container {
+    display: block;
+    margin: 10px auto;
+}
+
+/* Header Styles */
+header {
+    background-color: #2196F3; /* Primary color */
+    color: #ffffff; /* Text color */
+    padding: 20px;
+    text-align: center;
+}
+
+/* Navigation Styles */
+
+nav {
+    text-align: left;
+}
+nav ul {
+    list-style-type: none;
+    display: block;
+}
+
+nav ul li {
+    display: block;
+    clear: both;
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    display: block;
+    clear: both;
+    width: 100%;
+    transition: background-color 0.3s;
+    padding-left: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.current-menu-item.menu-item-home:before {
+    background-image: url('data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KDTxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIi8+Cg08ZyBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KDTxnIGlkPSJTVkdSZXBvX2ljb25DYXJyaWVyIj4gPHBhdGggZD0iTTIyIDEyLjIwMzlWMTMuNzI1QzIyIDE3LjYyNTggMjIgMTkuNTc2MyAyMC44Mjg0IDIwLjc4ODFDMTkuNjU2OSAyMiAxNy43NzEyIDIyIDE0IDIySDEwQzYuMjI4NzYgMjIgNC4zNDMxNSAyMiAzLjE3MTU3IDIwLjc4ODFDMiAxOS41NzYzIDIgMTcuNjI1OCAyIDEzLjcyNVYxMi4yMDM5QzIgOS45MTU0OSAyIDguNzcxMjggMi41MTkyIDcuODIyNzRDMy4wMzg0IDYuODc0MjEgMy45ODY5NSA2LjI4NTUxIDUuODg0MDMgNS4xMDgxM0w3Ljg4NDAzIDMuODY2ODdDOS44ODkzOSAyLjYyMjI5IDEwLjg5MjEgMiAxMiAyQzEzLjEwNzkgMiAxNC4xMTA2IDIuNjIyMjkgMTYuMTE2IDMuODY2ODdMMTguMTE2IDUuMTA4MTJDMjAuMDEzMSA2LjI4NTUxIDIwLjk2MTYgNi44NzQyMSAyMS40ODA4IDcuODIyNzQiIHN0cm9rZT0iIzA4N2U4YiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPiA8cGF0aCBkPSJNMTUgMThIOSIgc3Ryb2tlPSIjMDg3ZThiIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+IDwvZz4KDTwvc3ZnPg==') !important;
+}
+.menu-item:before {
+    content: "";
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+    position: absolute;
+    top: 46%;
+    left: 5px;
+    transform: translateY(-50%);
+}
+.menu-item:before {
+    background-image: url('data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9Ii04LjQ3IDAgODguOSA4OC45IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwMDAwMDAiPgoNPGcgaWQ9IlNWR1JlcG9fYmdDYXJyaWVyIiBzdHJva2Utd2lkdGg9IjAiLz4KDTxnIGlkPSJTVkdSZXBvX3RyYWNlckNhcnJpZXIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgoNPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPiA8ZyBpZD0iR3JvdXBfMTgiIGRhdGEtbmFtZT0iR3JvdXAgMTgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NTIgLTY3MikiPiA8cGF0aCBpZD0iUGF0aF8zNyIgZGF0YS1uYW1lPSJQYXRoIDM3IiBkPSJNNzE4LjgsNzE3LjFWNjkxLjhMNzAyLjQsNjc0SDY2NC41QTEwLjUsMTAuNSwwLDAsMCw2NTQsNjg0LjV2NjMuOWExMC41LDEwLjUsMCwwLDAsMTAuNSwxMC41aDQzLjhhMTAuNSwxMC41LDAsMCwwLDEwLjUtMTAuNXYtOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjIyMjIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSI0Ii8+IDxwYXRoIGlkPSJQYXRoXzM4IiBkYXRhLW5hbWU9IlBhdGggMzgiIGQ9Ik02OTcuMyw2NzUuMXYxNi40cy0uMiw1LjgsMy41LDUuOGgxNi40IiBmaWxsPSJub25lIiBzdHJva2U9IiMyMjIyMjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjQiLz4gPHBhdGggaWQ9IlBhdGhfMzkiIGRhdGEtbmFtZT0iUGF0aCAzOSIgZD0iTTcyMS45LDcyOS4yYTMuMTcyLDMuMTcyLDAsMCwxLTMuNywzLjcsMy4yMDksMy4yMDksMCwwLDEtMi41LTIuNSwzLjE3MiwzLjE3MiwwLDAsMSwzLjctMy43QTMuNTEyLDMuNTEyLDAsMCwxLDcyMS45LDcyOS4yWiIgZmlsbD0iIzIyMjIyMiIgc3Ryb2tlPSIjMjIyMjIyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iNCIvPiA8L2c+IDwvZz4KDTwvc3ZnPg==');
+}
+.current-menu-item:before {
+    background-image: url('data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9Ii04LjQ3IDAgODguOSA4OC45IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwMDAwMDAiPgoNPGcgaWQ9IlNWR1JlcG9fYmdDYXJyaWVyIiBzdHJva2Utd2lkdGg9IjAiLz4KDTxnIGlkPSJTVkdSZXBvX3RyYWNlckNhcnJpZXIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgoNPGcgaWQ9IlNWR1JlcG9faWNvbkNhcnJpZXIiPiA8ZyBpZD0iR3JvdXBfMTgiIGRhdGEtbmFtZT0iR3JvdXAgMTgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NTIgLTY3MikiPiA8cGF0aCBpZD0iUGF0aF8zNyIgZGF0YS1uYW1lPSJQYXRoIDM3IiBkPSJNNzE4LjgsNzE3LjFWNjkxLjhMNzAyLjQsNjc0SDY2NC41QTEwLjUsMTAuNSwwLDAsMCw2NTQsNjg0LjV2NjMuOWExMC41LDEwLjUsMCwwLDAsMTAuNSwxMC41aDQzLjhhMTAuNSwxMC41LDAsMCwwLDEwLjUtMTAuNXYtOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDg3ZThiIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLXdpZHRoPSI0Ii8+IDxwYXRoIGlkPSJQYXRoXzM4IiBkYXRhLW5hbWU9IlBhdGggMzgiIGQ9Ik02OTcuMyw2NzUuMXYxNi40cy0uMiw1LjgsMy41LDUuOGgxNi40IiBmaWxsPSJub25lIiBzdHJva2U9IiMwODdlOGIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2Utd2lkdGg9IjQiLz4gPHBhdGggaWQ9IlBhdGhfMzkiIGRhdGEtbmFtZT0iUGF0aCAzOSIgZD0iTTcyMS45LDcyOS4yYTMuMTcyLDMuMTcyLDAsMCwxLTMuNywzLjcsMy4yMDksMy4yMDksMCwwLDEtMi41LTIuNSwzLjE3MiwzLjE3MiwwLDAsMSwzLjctMy43QTMuNTEyLDMuNTEyLDAsMCwxLDcyMS45LDcyOS4yWiIgZmlsbD0iIzA4N2U4YiIgc3Ryb2tlPSIjMDg3ZThiIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS13aWR0aD0iNCIvPiA8L2c+IDwvZz4KDTwvc3ZnPg==');
+}
+
+nav ul li a:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+}
+
+/* Main Content Styles */
+.main-content {
+    padding: 20px;
+    margin: auto;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #2196F3;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+#main .container {
+    width: calc(100% - 290px);
+    float: left;
+    margin-right: 10px;
+}
+
+#sidebar {
+    margin-top: 10px;
+    position: relative;
+    background: #ffffff;
+    box-shadow: 1px 1px 20px 4px #eee;
+    border-radius: 19px;
+    width: 280px;
+    float: left;
+    padding-left: 20px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#sidebar h3 {
+    margin-bottom: 11px;
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    clear: both;
+}
+
+#sidebar h3 img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 23px;
+}
+
+.homepage-tile .button {
+    background: #0b3954;
+    color: #ffffff;
+    padding: 7px 32px 7px 12px;
+    border-radius: 19px;
+    font-size: 14px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.button:after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48IS0tIFVwbG9hZGVkIHRvOiBTVkcgUmVwbywgd3d3LnN2Z3JlcG8uY29tLCBHZW5lcmF0b3I6IFNWRyBSZXBvIE1peGVyIFRvb2xzIC0tPg0KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik05IDVMMTQuMTUgMTBDMTQuNDIzNyAxMC4yNTYzIDE0LjY0MTkgMTAuNTY1OSAxNC43OTEgMTAuOTA5OUMxNC45NDAyIDExLjI1MzkgMTUuMDE3MSAxMS42MjUgMTUuMDE3MSAxMkMxNS4wMTcxIDEyLjM3NSAxNC45NDAyIDEyLjc0NTggMTQuNzkxIDEzLjA4OThDMTQuNjQxOSAxMy40MzM5IDE0LjQyMzcgMTMuNzQzNyAxNC4xNSAxNEw5IDE5IiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4NCjwvc3ZnPg==);
+    background-size: cover;
+    position: absolute;
+    filter: contrast(0.5) brightness(10.5);
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+    }
+}
+
+.homepage-tile {
+    background: #087e8b;
+    display: block;
+    clear: both;
+    width: 100%;
+    padding: 30px 19px;
+    border-radius: 15px;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.homepage-thirds {
+    width: calc(33.3% - 6px);
+    float: left;
+    clear: none;
+    margin: 6px 3px;
+    padding: 20px 20px;
+    background: #ffffff;
+    color: #0b3954;
+    border: 2px solid #0b3954;
+    box-shadow: 1px 1px 20px 4px #eee;
+}
+
+.homepage-thirds img {
+    max-width: 100%;
+}
+
+
+.userPhoto {
+    background: #0b3954;
+    color: #ffffff;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 50%;
+    padding: 5px;
+    width: 80px;
+    height: 80px;
+    border: 4px solid #087e8b;
+    font-weight: 500;
+}
