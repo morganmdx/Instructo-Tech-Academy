@@ -30,5 +30,31 @@
                 ));
                 ?>
             </nav><!-- #site-navigation -->
+
+            <?php
+            // Query to count unread notifications
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'user_notifications';
+            $user_id = get_current_user_id();
+
+            // Get the count of unread notifications
+            $unread_count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name WHERE user_id = $user_id AND is_read = 0");
+
+            ?>
+
+            <!-- Add the icon and notification count in the header -->
+            <div class="fixed-settings">
+                <h3>Settings</h3>
+                <div class="notification-icon">
+                    <a href="<?php echo esc_url( home_url( '/notifications' ) ); ?>"> <!-- Link to the notifications page -->
+                        <i class="bi bi-bell" style="font-size: 24px;"></i> <!-- Bootstrap icon for the bell -->
+                        <?php if ($unread_count > 0) : ?>
+                            <span class="notification-count"><?php echo esc_html($unread_count); ?></span> <!-- Show the unread count -->
+                        <?php else: ?>
+                            <span class="notification-count">0</span> <!-- Show the unread count -->
+                        <?php endif; ?>
+                    </a>
+                </div>
+            </div>
         </div><!-- .container -->
     </header><!-- #site-header -->
