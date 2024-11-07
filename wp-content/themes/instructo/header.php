@@ -16,9 +16,9 @@
     <header id="site-header" class="site-header">
         <div class="container">
             <div class="site-branding">
-                <h1 class="site-title">
+                <div class="site-title">
                     <a href="<?php echo esc_url(home_url('/')); ?>"><span>Instructo</span> Tech.Academy</a>
-                </h1>
+                </div>
                 <p class="site-description"><?php bloginfo('description'); ?></p>
             </div>
 
