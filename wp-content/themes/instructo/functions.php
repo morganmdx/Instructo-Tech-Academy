@@ -53,3 +53,36 @@ function instructo_learn_widgets_init() {
 add_action('widgets_init', 'instructo_learn_widgets_init');
 
 
+function ajax_live_search() {
+    if (!isset($_GET['query']) || empty($_GET['query'])) {
+        wp_send_json([]);
+        wp_die();
+    }
+
+    $query = sanitize_text_field($_GET['query']);
+    $args = [
+        's' => $query,
+        'post_type' => 'page',  // Customize as needed
+        'posts_per_page' => 10
+    ];
+
+    $search_query = new WP_Query($args);
+    $results = [];
+
+    if ($search_query->have_posts()) {
+        while ($search_query->have_posts()) {
+            $search_query->the_post();
+            $results[] = [
+                'title' => get_the_title(),
+                'link' => get_permalink(),
+                'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'medium')  // Medium thumbnail
+            ];
+        }
+        wp_reset_postdata();
+    }
+
+    wp_send_json($results);
+    wp_die();
+}
+add_action('wp_ajax_live_search', 'ajax_live_search');
+add_action('wp_ajax_nopriv_live_search', 'ajax_live_search');
