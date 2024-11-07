@@ -20,16 +20,7 @@
         <p>Sorry, no posts matched your criteria.</p>
         <?php endif; ?>
     </div>
-    <aside id="sidebar">
-        <h3>Your Profile <!-- Link to an external SVG file --> <img src="<?= get_template_directory_uri() . "./ellipsis-vertical.svg" ?>" alt="SVG Icon" width="30px" height="30px"></h3>
-        <div class="userPhoto">MM</div>
-        <?php global $current_user; wp_get_current_user(); 
-        if ( is_user_logged_in() ) { 
-        echo '<p>Good morning, ' . $current_user->display_name . "</p>"; 
-        } else { 
-        wp_loginout(); 
-        } ?>
-    </aside> 
+    <?php get_sidebar(); ?>
 </main>
 
     <script>
