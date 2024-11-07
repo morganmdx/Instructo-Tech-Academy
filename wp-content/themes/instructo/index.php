@@ -2,6 +2,7 @@
 
 <main id="main" class="site-main">
     <div class="container">
+        <h1>Learning for All | Develop your Digital and Computing Skills, fit for a Digital Age!</h1>
         <div class="homepage-tile">
             <h2 class="h2home">Learn new Skills with Instructo Tech Academy</h2>
             <div style="height: 10px; display: block; clear: both;"></div>
