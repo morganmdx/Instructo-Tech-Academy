@@ -49,19 +49,25 @@ h2.h2home {
     font-weight: 600;
 }
 
-h1 {
+.site-title {
     font-family: "Luckiest Guy", cursive;
     font-size: 23px;
     line-height: 1em;
     text-align: left;
 }
 
-h1 a span {
+h1 {
+    line-height: 1.3em;
+    margin-bottom: 15px;
+    font-size: 1.7em;
+}
+
+h1 a span, .site-title a span {
     color: #0b3954;
     font-size: 33px;
 }
 
-h1 a {
+h1 a, .site-title a {
     color: #087e8b;
 }
 
@@ -277,4 +283,25 @@ footer {
     height: 80px;
     border: 4px solid #087e8b;
     font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Search page */
+.coursesearch-container {
+    margin-bottom: 20px;
+}
+.live-search-container {
+    margin: 10px 0px;
+}
+#live-search-input {
+    border-radius: 15px;
+    border: 2px solid #eaeaea;
+    width: 100%;
+    padding: 11px 20px;
+}
+div#live-search-results:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0px;
 }
