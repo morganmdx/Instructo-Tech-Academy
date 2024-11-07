@@ -9,54 +9,49 @@
             <a href="#" class="button">Sign up</a>
         </div>
 
-        <div class="homepage-tile homepage-thirds">
-            <img src="<?= get_template_directory_uri() . "./stock-image-1.png" ?>" width="400" alt="Stock image">
-            <h2 class="h2home">Course 1</h2>
-            <div style="height: 10px; display: block; clear: both;"></div>
-            <a href="#" class="button">Enrol</a>
-        </div>
+        <?php
+        // Define the WP_Query to get all 'pathway' post types
+        $args = array(
+            'post_type'      => 'pathway',  // Custom post type
+            'posts_per_page' => -1,         // Get all posts
+            'post_status'    => 'publish'   // Only published posts
+        );
 
-        <div class="homepage-tile homepage-thirds">
-            <img src="<?= get_template_directory_uri() . "./stock-image-3.png" ?>" width="400" alt="Stock image">
-            <h2 class="h2home">Course 2</h2>
-            <div style="height: 10px; display: block; clear: both;"></div>
-            <a href="#" class="button">Enrol</a>
-        </div>
+        // Run the query
+        $query = new WP_Query( $args );
 
-        <div class="homepage-tile homepage-thirds">
-            <img src="<?= get_template_directory_uri() . "./stock-image-2.png" ?>" width="400" alt="Stock image">
-            <h2 class="h2home">Course 3</h2>
-            <div style="height: 10px; display: block; clear: both;"></div>
-            <a href="#" class="button">Enrol</a>
-        </div>
+        // Check if there are any posts
+        if ( $query->have_posts() ) :
+            // Loop through the posts
+            while ( $query->have_posts() ) : $query->the_post();
+                // Get the post title, permalink, and thumbnail URL
+                $post_title = get_the_title();
+                $post_permalink = get_permalink();
+                $post_thumbnail_url = get_the_post_thumbnail_url( get_the_ID(), 'full' ); // Get the full size thumbnail
 
-        <div class="homepage-tile homepage-thirds">
-            <img src="<?= get_template_directory_uri() . "./stock-image-2.png" ?>" width="400" alt="Stock image">
-            <h2 class="h2home">Course 4</h2>
-            <div style="height: 10px; display: block; clear: both;"></div>
-            <a href="#" class="button">Enrol</a>
-        </div>
+                // If there's no thumbnail, you can use a default image
+                if ( !$post_thumbnail_url ) {
+                    $post_thumbnail_url = 'path/to/default-image.jpg'; // Replace with your default image path
+                }
+                ?>
+                <div class="homepage-tile homepage-thirds">
+                    <img src="<?php echo esc_url( $post_thumbnail_url ); ?>" width="400" alt="<?php echo esc_attr( $post_title ); ?>">
+                    <h2 class="h2home"><?php echo esc_html( $post_title ); ?></h2>
+                    <div style="height: 10px; display: block; clear: both;"></div>
+                    <a href="<?php echo esc_url( $post_permalink ); ?>" class="button">Enrol</a>
+                </div>
+                <?php
+            endwhile;
+            // Reset post data after the loop
+            wp_reset_postdata();
+        else :
+            echo 'No pathways found.';
+        endif;
+        ?>
 
-        <div class="homepage-tile homepage-thirds">
-            <img src="<?= get_template_directory_uri() . "./stock-image-2.png" ?>" width="400" alt="Stock image">
-            <h2 class="h2home">Course 5</h2>
-            <div style="height: 10px; display: block; clear: both;"></div>
-            <a href="#" class="button">Enrol</a>
-        </div>
-
-        <div class="homepage-tile homepage-thirds">
-            <img src="<?= get_template_directory_uri() . "./stock-image-2.png" ?>" width="400" alt="Stock image">
-            <h2 class="h2home">Course 6</h2>
-            <div style="height: 10px; display: block; clear: both;"></div>
-            <a href="#" class="button">Enrol</a>
-        </div>
     </div>
 
-    <aside id="sidebar">
-        <h3>Your Profile <!-- Link to an external SVG file --> <img src="<?= get_template_directory_uri() . "./ellipsis-vertical.svg" ?>" alt="SVG Icon" width="30px" height="30px"></h3>
-        <div class="userPhoto">MM</div>
-        <p>Good morning, @NAME</p>
-    </aside>
+    <?php get_sidebar(); ?>
 
 </main>
 
