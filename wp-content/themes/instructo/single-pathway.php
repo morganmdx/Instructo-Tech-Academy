@@ -5,7 +5,12 @@
         <?php
         if (have_posts()) :
             while (have_posts()) : the_post();
-                $pathway_id = get_the_ID();
+            $user_id = get_current_user_id(); // Get the current user's ID
+            $pathway_id = get_the_ID(); // Get the current pathway's ID
+
+            // Check if the user is enrolled in this pathway (Assuming you have a custom function or a way to check)
+            $is_enrolled = check_user_enrollment($user_id, $pathway_id); // You need to define this function
+
                 ?>
                 
                 <h1><?php the_title(); ?></h1>
@@ -15,6 +20,15 @@
                 } ?>
 
                 <div><?php the_content(); ?></div>
+
+                <?php if (is_user_logged_in() && !$is_enrolled) : ?>
+                    <button class="button" id="enroll-button" data-pathway-id="<?php the_ID(); ?>">Enrol in this Pathway</button>
+                    <div id="enrollment-message"></div>
+                <?php elseif (is_user_logged_in() && $is_enrolled) : ?>
+                    <p>You are already enrolled in this pathway.</p>
+                <?php else : ?>
+                    <p>Please log in to enrol in this pathway.</p>
+                <?php endif; ?>
                 
                 <?php
                 // Get related modules
@@ -58,6 +72,19 @@
     padding: 5px 10px;
     cursor: default;
 }
+
+.enrol-button-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.enrol-button {
+    background-color: #0073e6;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+}
 </style>
 
 <script>
@@ -99,10 +126,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 menuItem.classList.add('active-module');
 
                 // Display the selected module content
-                moduleContentContainer.innerHTML = `<h2 class="module-title"><img src="data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iODAwcHgiIGhlaWdodD0iODAwcHgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KDTxnIGlkPSJTVkdSZXBvX2JnQ2FycmllciIgc3Ryb2tlLXdpZHRoPSIwIi8+Cg08ZyBpZD0iU1ZHUmVwb190cmFjZXJDYXJyaWVyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KDTxnIGlkPSJTVkdSZXBvX2ljb25DYXJyaWVyIj4gPHJlY3Qgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJ3aGl0ZSIvPiA8cGF0aCBkPSJNMTIgNi45MDkwOUMxMC44OTk5IDUuNTA4OTMgOS4yMDQwNiA0LjEwODc3IDUuMDAxMTkgNC4wMDYwMkM0LjcyNTEzIDMuOTk5MjggNC41IDQuMjIzNTEgNC41IDQuNDk5NjVDNC41IDYuNTQ4MTMgNC41IDE0LjMwMzQgNC41IDE2LjU5N0M0LjUgMTYuODczMSA0LjcyNTE1IDE3LjA5IDUuMDAxMTQgMTcuMDk5QzkuMjA0MDUgMTcuMjM2NCAxMC44OTk5IDE5LjA5OTggMTIgMjAuNU0xMiA2LjkwOTA5QzEzLjEwMDEgNS41MDg5MyAxNC43OTU5IDQuMTA4NzcgMTguOTk4OCA0LjAwNjAyQzE5LjI3NDkgMy45OTkyOCAxOS41IDQuMjE4NDcgMTkuNSA0LjQ5NDYxQzE5LjUgNi43ODQ0NyAxOS41IDE0LjMwNjQgMTkuNSAxNi41OTYzQzE5LjUgMTYuODcyNCAxOS4yNzQ5IDE3LjA5IDE4Ljk5ODkgMTcuMDk5QzE0Ljc5NiAxNy4yMzY0IDEzLjEwMDEgMTkuMDk5OCAxMiAyMC41TTEyIDYuOTA5MDlMMTIgMjAuNSIgc3Ryb2tlPSIjMjIyMjIyIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+IDxwYXRoIGQ9Ik0xOS4yMzUzIDZIMjEuNUMyMS43NzYxIDYgMjIgNi4yMjM4NiAyMiA2LjVWMTkuNTM5QzIyIDE5Ljk0MzYgMjEuNTIzMyAyMC4yMTI0IDIxLjE1MzUgMjAuMDQ4MUMyMC4zNTg0IDE5LjY5NDggMTkuMDMxNSAxOS4yNjMyIDE3LjI5NDEgMTkuMjYzMkMxNC4zNTI5IDE5LjI2MzIgMTIgMjEgMTIgMjFDMTIgMjEgOS42NDcwNiAxOS4yNjMyIDYuNzA1ODggMTkuMjYzMkM0Ljk2ODQ1IDE5LjI2MzIgMy42NDE1NiAxOS42OTQ4IDIuODQ2NDcgMjAuMDQ4MUMyLjQ3NjY4IDIwLjIxMjQgMiAxOS45NDM2IDIgMTkuNTM5VjYuNUMyIDYuMjIzODYgMi4yMjM4NiA2IDIuNSA2SDQuNzY0NzEiIHN0cm9rZT0iIzIyMjIyMiIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPiA8L2c+Cg08L3N2Zz4=" width="20">${module.title}</h2>${module.content}`;
+                moduleContentContainer.innerHTML = `<h2 class="module-title">${module.title}</h2>${module.content}`;
             });
         });
     }
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const enrollButton = document.getElementById('enroll-button');
+    const enrollmentMessage = document.getElementById('enrollment-message');
+
+    if (enrollButton) {
+        enrollButton.addEventListener('click', function () {
+            const pathwayId = enrollButton.getAttribute('data-pathway-id');
+
+            fetch('<?php echo admin_url("admin-ajax.php"); ?>?action=enroll_user_in_pathway', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'pathway_id=' + encodeURIComponent(pathwayId),
+                credentials: 'same-origin'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    enrollmentMessage.textContent = 'You have successfully enrolled in this pathway!';
+                    enrollButton.style.display = 'none'; // Hide the button after successful enrollment
+                } else {
+                    enrollmentMessage.textContent = 'Enrolment failed. Please try again.';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                enrollmentMessage.textContent = 'Error occurred. Please try again later.';
+            });
+        });
+    }
+});
+</script>
