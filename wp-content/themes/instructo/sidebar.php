@@ -1,6 +1,6 @@
 <aside id="sidebar">
     <h3>Your Profile <!-- Link to an external SVG file --> 
-        <img src="<?= get_template_directory_uri() . "./ellipsis-vertical.svg" ?>" alt="SVG Icon" width="30px" height="30px">
+        <img src="<?= get_template_directory_uri() . "/ellipsis-vertical.svg" ?>" alt="SVG Icon" width="30px" height="30px">
     </h3>
     <div class="userPhoto">
         <?php 
